@@ -186,11 +186,14 @@
             opacity: 0;
         }
 
-        .character-svg {
-            width: 100%;
-            height: 100%;
-            filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.1)); /* Легкая тень для котика */
-        }
+        .character-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.1));
+    animation: popIn 0.5s ease-out 0.8s forwards;
+    opacity: 0;
+}
 
         .waving-paw { 
             animation: wave 2s ease-in-out infinite;
@@ -534,56 +537,11 @@
     <div class="birthday-card-container">
         <div id="threejs-title-container"></div>
 
-        <div class="character-container">
-           <svg class="character-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-  <!-- Тело -->
-  <ellipse cx="100" cy="140" rx="45" ry="35" fill="#ffe0e5" stroke="#f0a5be" stroke-width="2"/>
-
-  <!-- Голова -->
-  <circle cx="100" cy="95" r="30" fill="#ffe0e5" stroke="#f0a5be" stroke-width="2"/>
-
-  <!-- Уши -->
-  <!-- Левое ухо -->
-  <polygon points="75,65 85,45 95,65" fill="#ffe0e5" stroke="#f0a5be" stroke-width="2"/>
-  <!-- Правое ухо -->
-  <polygon points="105,65 115,45 125,65" fill="#ffe0e5" stroke="#f0a5be" stroke-width="2"/>
-
-  <!-- Глаза -->
-  <!-- Левый глаз -->
-  <ellipse cx="85" cy="90" rx="8" ry="10" fill="white"/>
-  <circle cx="87" cy="90" r="3" fill="#4a2c2a"/>
-  <!-- Правый глаз -->
-  <ellipse cx="115" cy="90" rx="8" ry="10" fill="white"/>
-  <circle cx="117" cy="90" r="3" fill="#4a2c2a"/>
-
-  <!-- Нос -->
-  <path d="M95,100 Q100,105 105,100 Q100,107 95,100 Z" fill="#d47a8a"/>
-
-  <!-- Рот -->
-  <path d="M90,110 Q100,120 110,110" stroke="#d47a8a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-
-  <!-- Усы -->
-  <line x1="70" y1="100" x2="90" y2="100" stroke="#b25c6e" stroke-width="1.5"/>
-  <line x1="70" y1="105" x2="90" y2="105" stroke="#b25c6e" stroke-width="1.5"/>
-  <line x1="70" y1="110" x2="90" y2="110" stroke="#b25c6e" stroke-width="1.5"/>
-  <line x1="110" y1="100" x2="130" y2="100" stroke="#b25c6e" stroke-width="1.5"/>
-  <line x1="110" y1="105" x2="130" y2="105" stroke="#b25c6e" stroke-width="1.5"/>
-  <line x1="110" y1="110" x2="130" y2="110" stroke="#b25c6e" stroke-width="1.5"/>
-
-  <!-- Хвост -->
-  <g class="waving-paw">
-    <path d="M60,145 C50,160 45,170 40,180" stroke="#b25c6e" stroke-width="3" fill="none" stroke-linecap="round"/>
-  </g>
-
-  <!-- Задние лапы -->
-  <ellipse cx="70" cy="165" rx="10" ry="7" fill="#ffe0e5" stroke="#f0a5be" stroke-width="1.5"/>
-  <ellipse cx="130" cy="165" rx="10" ry="7" fill="#ffe0e5" stroke="#f0a5be" stroke-width="1.5"/>
-
-  <!-- Передние лапы -->
-  <ellipse cx="85" cy="155" rx="10" ry="7" fill="#ffe0e5" stroke="#f0a5be" stroke-width="1.5"/>
-  <ellipse cx="115" cy="155" rx="10" ry="7" fill="#ffe0e5" stroke="#f0a5be" stroke-width="1.5"/>
-</svg>
-        </div>
+     <div class="character-container">
+    <img src="https://w7.pngwing.com/pngs/288/230/png-transparent-hello-kitty-cute-cartoon-cat-with-bow.png " 
+         alt="Котик" 
+         class="character-img">
+</div>
 
         <div class="greeting-text">
             <p><strong>Сарачка,</strong> с твоим волшебным <strong>18-летием!</strong><br>Сегодня начинается новый этап в твоей жизни, полный свободы, мечт и безграничных возможностей. Желаю тебе море ярких эмоций, настоящей любви, крепких объятий и исполнения всех желаний. Ты — чудо, оставайся такой же светлой и вдохновляющей.<br>С праздником, <strong>принцесса!</strong></p>
@@ -887,3 +845,4 @@
     </script>
 </body>
 </html>
+
