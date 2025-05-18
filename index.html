@@ -588,116 +588,80 @@
 
     <button id="musicToggle">🎵</button>
 
-    <script>
-        // --- THREE.JS для 3D Заголовка ---
-        let scene, camera, renderer, textMesh;
-        const titleContainer = document.getElementById('threejs-title-container');
+  <!-- Tone.js для Музыки -->
+<script>
+    let player;
+    let musicPlaying = false;
+    const musicToggleButton = document.getElementById('musicToggle');
 
-        function initThreeJS() {
-            scene = new THREE.Scene();
-            const aspectRatio = titleContainer.clientWidth / titleContainer.clientHeight;
-            camera = new THREE.PerspectiveCamera(75, aspectRatio, 0.1, 1000);
-            camera.position.z = titleContainer.clientWidth < 480 ? 11 : 9.5; // Скорректирована позиция камеры
+    function setupMusic() {
+        if (player) return;
 
-            renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-            renderer.setSize(titleContainer.clientWidth, titleContainer.clientHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
-            titleContainer.appendChild(renderer.domElement);
+        const synth = new Tone.Synth({
+            oscillator: { type: 'triangle' },
+            envelope: { attack: 0.01, decay: 0.2, sustain: 0.2, release: 0.8 },
+            volume: -13
+        }).toDestination();
 
-            const loader = new THREE.FontLoader();
-            loader.load('https://raw.cdn.githack.com/mrdoob/three.js/dev/examples/fonts/helvetiker_regular.typeface.json', function (font) {
-                const textSize = titleContainer.clientWidth < 480 ? 1.1 : 1.4; 
-                const textGeometry = new THREE.TextGeometry('С Днём Рождения,\nСарачка!', {
-                    font: font, size: textSize, height: 0.25, curveSegments: 12,
-                    bevelEnabled: true, bevelThickness: 0.02, bevelSize: 0.04, bevelOffset: 0, bevelSegments: 4
-                });
-                textGeometry.center(); 
-                const textMaterial = new THREE.MeshPhongMaterial({ color: 0xd47a8a, specular: 0xffe489, shininess: 80 }); 
-                textMesh = new THREE.Mesh(textGeometry, textMaterial);
-                scene.add(textMesh);
-            }, undefined, function (error) {
-                console.error('Ошибка загрузки шрифта для Three.js:', error);
-                const fallbackTitle = document.createElement('h1');
-                fallbackTitle.textContent = 'С Днём Рождения, Сарачка!';
-                fallbackTitle.style.fontFamily = "'Lobster', cursive";
-                fallbackTitle.style.fontSize = titleContainer.clientWidth < 480 ? "1.8rem" : "2.3rem";
-                fallbackTitle.style.color = "#d47a8a";
-                fallbackTitle.style.textShadow = "1px 1px 0px #ffd700, 2px 2px 0px #b25c6e";
-                fallbackTitle.style.margin = "0";
-                titleContainer.innerHTML = ''; 
-                titleContainer.appendChild(fallbackTitle);
-            });
+        const now = Tone.now();
 
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.75); 
-            scene.add(ambientLight);
-            const pointLight = new THREE.PointLight(0xffffff, 0.95, 120); 
-            pointLight.position.set(4, 8, 12); 
-            scene.add(pointLight);
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.55);
-            directionalLight.position.set(-4, 6, 6);
-            scene.add(directionalLight);
-            animateThreeJS();
-        }
+        const melody = [
+            { note: 'G4', duration: '8n', time: now }, { note: 'G4', duration: '8n', time: now + 0.25 },
+            { note: 'A4', duration: '4n', time: now + 0.5 }, { note: 'G4', duration: '4n', time: now + 1.0 },
+            { note: 'C5', duration: '4n', time: now + 1.5 }, { note: 'B4', duration: '2n', time: now + 2.0 },
 
-        function animateThreeJS() {
-            requestAnimationFrame(animateThreeJS);
-            if (textMesh) {
-                textMesh.rotation.y += 0.004; 
+            { note: 'G4', duration: '8n', time: now + 3.0 }, { note: 'G4', duration: '8n', time: now + 3.25 },
+            { note: 'A4', duration: '4n', time: now + 3.5 }, { note: 'G4', duration: '4n', time: now + 4.0 },
+            { note: 'D5', duration: '4n', time: now + 4.5 }, { note: 'C5', duration: '2n', time: now + 5.0 },
+
+            { note: 'G4', duration: '8n', time: now + 6.0 }, { note: 'G4', duration: '8n', time: now + 6.25 },
+            { note: 'G5', duration: '4n', time: now + 6.5 }, { note: 'E5', duration: '4n', time: now + 7.0 },
+            { note: 'C5', duration: '4n', time: now + 7.5 }, { note: 'B4', duration: '4n', time: now + 8.0 },
+            { note: 'A4', duration: '4n', time: now + 8.5 },
+
+            { note: 'F5', duration: '8n', time: now + 9.0 }, { note: 'F5', duration: '8n', time: now + 9.25 },
+            { note: 'E5', duration: '4n', time: now + 9.5 }, { note: 'C5', duration: '4n', time: now + 10.0 },
+            { note: 'D5', duration: '4n', time: now + 10.5 }, { note: 'C5', duration: '2n', time: now + 11.0 }
+        ];
+
+        player = new Tone.Part((time, value) => {
+            synth.triggerAttackRelease(value.note, value.duration, time);
+        }, melody);
+
+        player.loop = true;
+        player.loopStart = 0;
+        player.loopEnd = '12m';
+    }
+
+    // Обработчик клика по кнопке музыки
+    musicToggleButton.addEventListener('click', async () => {
+        try {
+            // Запускаем AudioContext при первом взаимодействии
+            if (Tone.context.state !== 'running') {
+                await Tone.start();
+                console.log('AudioContext запущен!');
             }
-            if (renderer) renderer.render(scene, camera); 
-        }
-        
-        function onWindowResizeThreeJS() {
-            if (camera && renderer && titleContainer.clientWidth > 0 && titleContainer.clientHeight > 0) {
-                camera.aspect = titleContainer.clientWidth / titleContainer.clientHeight;
-                camera.position.z = titleContainer.clientWidth < 480 ? 11 : 9.5; 
-                camera.updateProjectionMatrix();
-                renderer.setSize(titleContainer.clientWidth, titleContainer.clientHeight);
-            }
-        }
 
-        // --- Tone.js для Музыки ---
-        let player;
-        let musicPlaying = false;
-        const musicToggleButton = document.getElementById('musicToggle');
-
-        function setupMusic() {
-            if (player) return;
-            const synth = new Tone.Synth({
-                oscillator: { type: 'triangle' }, 
-                envelope: { attack: 0.01, decay: 0.2, sustain: 0.2, release: 0.8 },
-                volume: -13 // Еще немного тише
-            }).toDestination();
-            const now = Tone.now();
-            const melody = [ /* Мелодия остается прежней */
-                { note: 'G4', duration: '8n', time: now }, { note: 'G4', duration: '8n', time: now + 0.25 }, { note: 'A4', duration: '4n', time: now + 0.5 }, { note: 'G4', duration: '4n', time: now + 1.0 }, { note: 'C5', duration: '4n', time: now + 1.5 }, { note: 'B4', duration: '2n', time: now + 2.0 },
-                { note: 'G4', duration: '8n', time: now + 3.0 }, { note: 'G4', duration: '8n', time: now + 3.25 }, { note: 'A4', duration: '4n', time: now + 3.5 }, { note: 'G4', duration: '4n', time: now + 4.0 }, { note: 'D5', duration: '4n', time: now + 4.5 }, { note: 'C5', duration: '2n', time: now + 5.0 },
-                { note: 'G4', duration: '8n', time: now + 6.0 }, { note: 'G4', duration: '8n', time: now + 6.25 }, { note: 'G5', duration: '4n', time: now + 6.5 }, { note: 'E5', duration: '4n', time: now + 7.0 }, { note: 'C5', duration: '4n', time: now + 7.5 }, { note: 'B4', duration: '4n', time: now + 8.0 }, { note: 'A4', duration: '4n', time: now + 8.5 },
-                { note: 'F5#', duration: '8n', time: now + 9.0 }, { note: 'F5#', duration: '8n', time: now + 9.25 }, { note: 'E5', duration: '4n', time: now + 9.5 }, { note: 'C5', duration: '4n', time: now + 10.0 }, { note: 'D5', duration: '4n', time: now + 10.5 }, { note: 'C5', duration: '2n', time: now + 11.0 },
-            ];
-            player = new Tone.Part((time, value) => { synth.triggerAttackRelease(value.note, value.duration, time); }, melody);
-            player.loop = true; player.loopStart = 0; player.loopEnd = '12m'; 
-        }
-        
-        musicToggleButton.addEventListener('click', async () => {
-            try {
-                if (Tone.context.state !== 'running') { await Tone.start(); console.log('AudioContext запущен!'); }
-                if (!player) { setupMusic(); }
-                if (musicPlaying) {
-                    player.stop(); Tone.Transport.stop(); musicPlaying = false; musicToggleButton.textContent = '🎵';
-                } else {
-                    Tone.Transport.start(); player.start(0); musicPlaying = true; musicToggleButton.textContent = '🔇';
-                }
-            } catch (error) {
-                console.error("Ошибка управления музыкой:", error);
-                if (!document.getElementById('audioError')) {
-                    const audioErrorDiv = document.createElement('div'); audioErrorDiv.id = 'audioError';
-                    audioErrorDiv.textContent = 'Не удалось запустить аудио. Проверьте настройки браузера.';
-                    audioErrorDiv.style.cssText = 'color: red; margin-top: 10px; font-size: 0.8rem;';
-                    document.querySelector('.greeting-text').appendChild(audioErrorDiv);
-                }
+            if (!player) {
+                setupMusic(); // Создаем мелодию при первом нажатии
             }
-        });
+
+            if (!musicPlaying) {
+                Tone.Transport.start();
+                player.start(0);
+                musicPlaying = true;
+                musicToggleButton.textContent = '🔇';
+            } else {
+                Tone.Transport.stop();
+                player.stop();
+                musicPlaying = false;
+                musicToggleButton.textContent = '🎵';
+            }
+        } catch (err) {
+            console.error("Ошибка воспроизведения музыки:", err);
+            alert("Не удалось запустить музыку. Пожалуйста, разрешите воспроизведение звука в браузере.");
+        }
+    });
 
         // --- Конфетти ---
         function launchConfetti() {
