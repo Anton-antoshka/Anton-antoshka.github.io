@@ -564,14 +564,14 @@
         <div class="gifts-section">
             <div class="gift" id="gift1">
                 <div class="lid"></div> <div class="box"></div> <div class="ribbon-vertical"></div> <div class="ribbon-horizontal"></div> <div class="bow"></div>
-                <div class="gift-label">Нажми на меня</div>
+                <div class="gift-label">Нажми</div>
             </div>
             <div class="gift" id="gift2"> <div class="lid"></div> <div class="box"></div> <div class="ribbon-vertical"></div> <div class="ribbon-horizontal"></div> <div class="bow"></div>
-                <div class="gift-label">Нажми на меня</div>
+                <div class="gift-label">Нажми</div>
             </div>
              <div class="gift" id="gift3">
                 <div class="lid"></div> <div class="box"></div> <div class="ribbon-vertical"></div> <div class="ribbon-horizontal"></div> <div class="bow"></div>
-                <div class="gift-label">Нажми на меня</div>
+                <div class="gift-label">Нажми</div>
             </div>
         </div>
 
@@ -607,7 +607,7 @@
             const loader = new THREE.FontLoader();
             loader.load('https://raw.cdn.githack.com/mrdoob/three.js/dev/examples/fonts/helvetiker_regular.typeface.json', function (font) {
                 const textSize = titleContainer.clientWidth < 480 ? 1.1 : 1.4; 
-                const textGeometry = new THREE.TextGeometry('С Днём Рождения,\nСара!', {
+                const textGeometry = new THREE.TextGeometry('С Днём Рождения,\nСарачка!', {
                     font: font, size: textSize, height: 0.25, curveSegments: 12,
                     bevelEnabled: true, bevelThickness: 0.02, bevelSize: 0.04, bevelOffset: 0, bevelSegments: 4
                 });
@@ -618,7 +618,7 @@
             }, undefined, function (error) {
                 console.error('Ошибка загрузки шрифта для Three.js:', error);
                 const fallbackTitle = document.createElement('h1');
-                fallbackTitle.textContent = 'С Днём Рождения, Сара!';
+                fallbackTitle.textContent = 'С Днём Рождения, Сарачка!';
                 fallbackTitle.style.fontFamily = "'Lobster', cursive";
                 fallbackTitle.style.fontSize = titleContainer.clientWidth < 480 ? "1.8rem" : "2.3rem";
                 fallbackTitle.style.color = "#d47a8a";
