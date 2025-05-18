@@ -535,38 +535,54 @@
         <div id="threejs-title-container"></div>
 
         <div class="character-container">
-            <svg class="character-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <path d="M60,90 Q50,40 100,30 Q150,40 140,90 Q150,130 100,135 Q50,130 60,90 Z" fill="#ffe0e5" stroke="#f0a5be" stroke-width="2"/>
-                <ellipse cx="100" cy="100" rx="38" ry="30" fill="#fff0f5"/>
-                
-<!-- Левое ухо -->
-<path d="M70,50 Q85,35 95,60 Q85,70 70,60 Z" fill="#f8c8dc"/>
+           <svg class="character-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Тело -->
+  <ellipse cx="100" cy="140" rx="45" ry="35" fill="#ffe0e5" stroke="#f0a5be" stroke-width="2"/>
 
-<!-- Правое ухо -->
-<path d="M130,50 Q115,35 105,60 Q115,70 130,60 Z" fill="#f8c8dc"/>
+  <!-- Голова -->
+  <circle cx="100" cy="95" r="30" fill="#ffe0e5" stroke="#f0a5be" stroke-width="2"/>
 
-                <circle cx="85" cy="95" r="8" fill="#fff"/> 
-                <circle cx="86" cy="96" r="5" fill="#4a2c2a"/> 
-                <circle cx="83" cy="92" r="2" fill="white"/> <circle cx="115" cy="95" r="8" fill="#fff"/> 
-                <circle cx="114" cy="96" r="5" fill="#4a2c2a"/> 
-                <circle cx="117" cy="92" r="2" fill="white"/> <polygon points="98,108 102,108 100,112" fill="#d47a8a"/>
-                <path d="M92,118 Q100,123 108,118" stroke="#d47a8a" stroke-width="2" fill="none" stroke-linecap="round"/>
-                
-                <line x1="75" y1="105" x2="50" y2="100" stroke="#b25c6e" stroke-width="1.5"/>
-                <line x1="75" y1="110" x2="50" y2="110" stroke="#b25c6e" stroke-width="1.5"/>
-                <line x1="75" y1="115" x2="50" y2="120" stroke="#b25c6e" stroke-width="1.5"/>
-                <line x1="125" y1="105" x2="150" y2="100" stroke="#b25c6e" stroke-width="1.5"/>
-                <line x1="125" y1="110" x2="150" y2="110" stroke="#b25c6e" stroke-width="1.5"/>
-                <line x1="125" y1="115" x2="150" y2="120" stroke="#b25c6e" stroke-width="1.5"/>
+  <!-- Уши -->
+  <!-- Левое ухо -->
+  <polygon points="75,65 85,45 95,65" fill="#ffe0e5" stroke="#f0a5be" stroke-width="2"/>
+  <!-- Правое ухо -->
+  <polygon points="105,65 115,45 125,65" fill="#ffe0e5" stroke="#f0a5be" stroke-width="2"/>
 
-                <ellipse cx="100" cy="165" rx="45" ry="30" fill="#f8c8dc" stroke="#e7a7c0" stroke-width="1.5"/>
-                
-                <g class="waving-paw">
-                    <ellipse cx="60" cy="145" rx="15" ry="10" fill="#ffe0e5" stroke="#f0a5be" stroke-width="1.5" transform="rotate(25 60 145)"/>
-                </g>
-                <ellipse cx="140" cy="145" rx="15" ry="10" fill="#ffe0e5" stroke="#f0a5be" stroke-width="1.5" transform="rotate(-25 140 145)"/>
-                <path d="M135 160 Q165 140 170 110 C165 145 140 160 135 160" fill="#f0a5be" stroke="#e7a7c0" stroke-width="1.5" />
-            </svg>
+  <!-- Глаза -->
+  <!-- Левый глаз -->
+  <ellipse cx="85" cy="90" rx="8" ry="10" fill="white"/>
+  <circle cx="87" cy="90" r="3" fill="#4a2c2a"/>
+  <!-- Правый глаз -->
+  <ellipse cx="115" cy="90" rx="8" ry="10" fill="white"/>
+  <circle cx="117" cy="90" r="3" fill="#4a2c2a"/>
+
+  <!-- Нос -->
+  <path d="M95,100 Q100,105 105,100 Q100,107 95,100 Z" fill="#d47a8a"/>
+
+  <!-- Рот -->
+  <path d="M90,110 Q100,120 110,110" stroke="#d47a8a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+  <!-- Усы -->
+  <line x1="70" y1="100" x2="90" y2="100" stroke="#b25c6e" stroke-width="1.5"/>
+  <line x1="70" y1="105" x2="90" y2="105" stroke="#b25c6e" stroke-width="1.5"/>
+  <line x1="70" y1="110" x2="90" y2="110" stroke="#b25c6e" stroke-width="1.5"/>
+  <line x1="110" y1="100" x2="130" y2="100" stroke="#b25c6e" stroke-width="1.5"/>
+  <line x1="110" y1="105" x2="130" y2="105" stroke="#b25c6e" stroke-width="1.5"/>
+  <line x1="110" y1="110" x2="130" y2="110" stroke="#b25c6e" stroke-width="1.5"/>
+
+  <!-- Хвост -->
+  <g class="waving-paw">
+    <path d="M60,145 C50,160 45,170 40,180" stroke="#b25c6e" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- Задние лапы -->
+  <ellipse cx="70" cy="165" rx="10" ry="7" fill="#ffe0e5" stroke="#f0a5be" stroke-width="1.5"/>
+  <ellipse cx="130" cy="165" rx="10" ry="7" fill="#ffe0e5" stroke="#f0a5be" stroke-width="1.5"/>
+
+  <!-- Передние лапы -->
+  <ellipse cx="85" cy="155" rx="10" ry="7" fill="#ffe0e5" stroke="#f0a5be" stroke-width="1.5"/>
+  <ellipse cx="115" cy="155" rx="10" ry="7" fill="#ffe0e5" stroke="#f0a5be" stroke-width="1.5"/>
+</svg>
         </div>
 
         <div class="greeting-text">
